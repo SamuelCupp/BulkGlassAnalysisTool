@@ -1,3 +1,19 @@
+## Python Branch ##
+This branch implements the code in python3. It is far more readable thanks to Python's
+simpler string manipulation relative to Fortran. Beyond cosmetic differences, it uses
+different rotation and translation routines. The fragment rotation method in this code
+is uniformly distributed, unlike the original Fortran implementation. The translation
+routine was originally uniformly distributed in a cube, but this one is uniformly
+distributed in a sphere. Since a uinform cubic distribution is easy to implement,
+having the uniform spherical implementation is a welcome addition, even if the cubic
+form is desired at some later time.
+
+This branch also uses importlib to programatically import the interface for the chemistry
+package. This means that, if another package is added in the packages subdirectory,
+then the package parameter can be immediately used to switch this package.
+
+Paralellization is not yet implemented.
+
 ##  Bulk Glass Numerical Analysis Tool  ##  
 
 This code implements a random network approach to analyze the properties of bulk glass.
@@ -20,17 +36,21 @@ box. Each fragment may have as many atoms as desired, though too many would inhi
 the program's ability to find energy minima or valid configurations. Fragments that are
 very small may increase the configuration space of the problem and may require
 longer times for convergence of the solution. The fragment name is entirely user-defined,
-and it may contain any valid characters for reading into a string.
+and it may contain any alphanumeric characters.
 
-The file input.txt contains information on how to set up the run. The number of fragments and the
-number of elements are both given in this file. The MOPAC optimization option currently
-serves no purpose, as using MOPAC is necessary to have any meaningful results. However,
-this code was designed such that interfaces with other chemistry packages could be easily
-added. If a NWChem module were added, this feature will allow for switching between
-different packages. The code could easily be expanded to allow for more optional parameters
-for these interfaces by utilizing the existing framework for new features.
+The file input.txt contains information on how to set up the run. The fragment_count
+parameter determines the number of fragments that are used to generate the random network.
+The optimization option currently serves no purpose, as using geometry optimization via
+a chemistry package is required to have any meaningful results. However, if the Metropolis
+algorithm approach were revisited in the future, this flag would allow for switching between
+modes. The package variable sets the active chemistry package. Currently, it only supports
+MOPAC, but this code is designed such that interfaces with other chemistry packages could
+be easily added. If a NWChem module were added, for instance, this feature allows for
+switching between different packages. The code could easily be expanded to allow for more
+optional parameters for these interfaces by utilizing the existing framework for new features.
 
 The file vanderwaals.txt is a static list of the Van der Waals radii used by this code. The
 code makes sure that atoms do not enter the Van der Waals radius of adjacent atoms when they
-are moved, and this is used to prevent invalid configurations, particularly those which would
-cause MOPAC (and potentially other packages) to fail to calculate the correct energies.
+are moved, and this is used to prevent invalid and unphysical configurations, particularly
+those which would cause MOPAC (and potentially other packages) to fail to calculate the
+correct energies.

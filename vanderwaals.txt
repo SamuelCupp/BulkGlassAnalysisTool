@@ -1,12 +1,17 @@
-H	1.20
-Li	1.80
-C	1.53
-N	1.48
-O	1.36
-F	1.30
-Na	2.30
-Al	2.05
-Si	2.10
+The Van der Waals radii are currently unused, as MOPAC optimization can
+handle down to 1 angstrom separation without problems. If the original
+Metropolis approach were revisited, these would be used to reduce
+the configuration space by rejecting more configurations.
+
+H   1.20
+Li  1.80
+C   1.53
+N   1.48
+O   1.36
+F   1.30
+Na  2.30
+Al  2.05
+Si  2.10
 P	1.75
 S	1.70
 Cl	1.65
@@ -15,4 +20,3 @@ Ca	2.75
 Br	1.80
 I	2.05
 As	1.85
-==End File==

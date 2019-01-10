@@ -1,13 +1,20 @@
-##  This file sets the conditions for the specific run     ##
-##  and includes any optional features currently available ##
+This file sets the conditions for the specific run and
+includes any optional features currently available.
 
-MOPAC optimization? (1=yes, 0=no)
-1
+Chemistry package to be used
+package = MOPAC
+
+Number of threads to be used by the chemistry package
+threads = 2
+
+!!  The implementation for switching packages should be changed, as this
+!!  currently allows for users to run *any* program in this manner by
+!!  simply providing the path. This is not acceptable coding practice.
+package location
+/opt/mopac/MOPAC2016.exe
+
+Use the package's optimization instead of the Metropolis algorithm
+opt = 1
 
 Number of fragments to be used in constructing network
-5
-
-Number of elements being used in the model
-2
-
-##  EndFile                                                ##
+fragment_count = 10

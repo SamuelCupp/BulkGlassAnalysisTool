@@ -1,12 +1,10 @@
-##  This file provides fragments for use in         ##
-##  the random generation of an amorphous network.  ##
-##  See the README for additional information.      ##
+This file provides fragments for use in the random generation
+of an amorphous network. See the README for additional information.
 
 number of fragments being used:
-2
+fragments = 2
 
 As2S3
-10 atoms
 As -0.64010  0.16640 -1.99784
 As  1.24387  2.14731 -0.04808
 As -2.34034 -2.75222 -2.07730
@@ -19,7 +17,6 @@ S  -4.48601 -3.02665 -2.73423
 S  -4.44258 -6.07444 -1.15379
 
 As4S4
-8 atoms
 S  -4.94122  2.27823 -0.72607
 S  -4.65118 -0.78170  0.03548
 S  -1.53918  2.70026 -0.32290
@@ -28,13 +25,3 @@ As -3.39065  2.56240  0.93417
 As -3.19002  0.17247  1.46956 
 As -4.14518  0.47064 -1.73811
 As -1.69355  0.77468 -1.48336
-
-
-
-
-
-
-
-
-
-#                       End file                     ##
