@@ -38,7 +38,7 @@ def inputdata(fragments):
             elif re.match("\s*package location\s*",line):
                 m = re.match("(.*)",next(f))
                 callpath = m.group(1)
-                # There should be a way to tst the exe with subprocess,
+                # There should be a way to test the exe with subprocess,
                 # but I haven't figured out how to apply it correctly.
                 # mopac needs an enter to finish, but I don't see how to pass one.
 #                try:
@@ -95,20 +95,23 @@ def inputdata(fragments):
 
 def initial_network(network, fragNumber, fragments):
     import copy
+    network.clear()
     network.append(copy.deepcopy(fragments[random.randrange(0,len(fragments))]))
     randomRotate(network[0])
     rejections = 0
     for i in range(1,int(fragNumber)):
         ierr = 1
         while(ierr == 1):
-          network.append(copy.deepcopy(fragments[random.randrange(0,len(fragments))]))
-          randomTranslate(network[i],fragNumber)
-          randomRotate(network[i])
-          ierr = posCheck(network)
-          if(ierr):
-              rejections += 1
-              network.pop()
-          print(rejections)
+            network.append(copy.deepcopy(fragments[random.randrange(0,len(fragments))]))
+            #This randomly translates fragments [1,fragNumber] angstroms. The size of the
+            #random sphere should be considered in more detail for real runs.
+            randomTranslate(network[i],fragNumber)
+            randomRotate(network[i])
+            ierr = posCheck(network)
+            if(ierr):
+                rejections += 1
+                network.pop()
+    print("Network construction finished with", rejections,"fragment placements failed.")
     names = []
     for frag in network:
         names.append(frag.name)

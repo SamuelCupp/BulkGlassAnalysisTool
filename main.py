@@ -5,7 +5,7 @@ from initialization import *
 from error import *
 from analysis import *
 
-# Below are the mpi calls from Fortran code.
+#### Below are the mpi calls from Fortran code. ####
 #call MPI_INIT(ierr)
 #if (ierr.ne.0) then
 #        write(*,*) 'init err'
@@ -19,10 +19,12 @@ from analysis import *
 #        write(*,*) 'rank err'
 #        stop
 
+
+
 mynum = 0 #placeholder for processor number
 #beginning at line 51 of main.f90 of master branch
 
-avgTotal = 1 #number of iterations/thread
+avgTotal = 2 #number of iterations/thread
 lowBin = 0.5
 highBin = 6.0
 binSize = 0.1
@@ -45,8 +47,8 @@ commRun = importlib.import_module("packages."+package+".interface").commRun
 if opt:
     for i in range(0,avgTotal):
         rejection += initial_network(network, fragNumber, fragments)
-#        commOut(mynum,threads,opt,network)
-#        commRun(callpath,mynum,threads)
+        commOut(mynum,threads,opt,network)
+        commRun(callpath,mynum,threads)
         commIn(mynum,opt,network,Eavg)
         pairDistance(network,pairBins,lowBin,highBin,binSize)
 else:
@@ -64,7 +66,7 @@ for key in pairBins:
     avgDist[key] = subtotal/pairCount
 print(avgDist)
 
-# Below are the mpi calls from Fortran code.
+#### Below are the mpi calls from Fortran code. ####
 #CALL MPI_ALLREDUCE(Eavg,Elast,1,MPI_DOUBLE_PRECISION,MPI_SUM,&
 #        MPI_COMM_WORLD,ierr)
 #if(ierr.ne.0) then
