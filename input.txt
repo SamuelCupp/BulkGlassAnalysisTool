@@ -1,0 +1,13 @@
+##  This file sets the conditions for the specific run     ##
+##  and includes any optional features currently available ##
+
+MOPAC optimization? (1=yes, 0=no)
+1
+
+Number of fragments to be used in constructing network
+5
+
+Number of elements being used in the model
+2
+
+##  EndFile                                                ##

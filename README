@@ -1,0 +1,36 @@
+##  Bulk Glass Numerical Analysis Tool  ##  
+
+This code implements a random network approach to analyze the properties of bulk glass.
+MOPAC and MPI are used by this code and are required for it to function. The initial
+goal was to use the Metropolis algorithm to average over the configuration space of
+the glass; however, the complexities of this problem led to the implementation of a
+simpler approach. The network is generated randomly from user-defined fragments, just
+as we would do for the Metropolis approach. Instead of using Metropolis, we instead
+use MOPAC to optimize the geometry of the random network, and we average over many
+random networks. Since MOPAC will only find the local minimum of each configuration,
+this approximates the desired results.
+
+While it is currently designed to use MOPAC for aspects of the calculations, its modular
+design allows for an easy conversion for interfacing with other programs. Once compiled,
+most features can be changed via the parameter files fragments.txt and input.txt.
+
+The file fragments.txt contains the fragments to be used while constructing the glassy network.
+Currently, this is done by randomly placing fragments with random orientations within a
+box. Each fragment may have as many atoms as desired, though too many would inhibit
+the program's ability to find energy minima or valid configurations. Fragments that are
+very small may increase the configuration space of the problem and may require
+longer times for convergence of the solution. The fragment name is entirely user-defined,
+and it may contain any valid characters for reading into a string.
+
+The file input.txt contains information on how to set up the run. The number of fragments and the
+number of elements are both given in this file. The MOPAC optimization option currently
+serves no purpose, as using MOPAC is necessary to have any meaningful results. However,
+this code was designed such that interfaces with other chemistry packages could be easily
+added. If a NWChem module were added, this feature will allow for switching between
+different packages. The code could easily be expanded to allow for more optional parameters
+for these interfaces by utilizing the existing framework for new features.
+
+The file vanderwaals.txt is a static list of the Van der Waals radii used by this code. The
+code makes sure that atoms do not enter the Van der Waals radius of adjacent atoms when they
+are moved, and this is used to prevent invalid configurations, particularly those which would
+cause MOPAC (and potentially other packages) to fail to calculate the correct energies.
