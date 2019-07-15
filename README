@@ -12,7 +12,7 @@ This branch also uses importlib to programatically import the interface for the 
 package. This means that, if another package is added in the packages subdirectory,
 then the package parameter can be immediately used to switch this package.
 
-Paralellization is not yet implemented.
+Parallelization is not yet implemented.
 
 ##  Bulk Glass Numerical Analysis Tool  ##  
 
